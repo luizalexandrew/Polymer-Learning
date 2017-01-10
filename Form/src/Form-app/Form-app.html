@@ -1,0 +1,74 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
+
+<dom-module id="Form-app">
+    <template>
+        <style>
+            :host {
+                display: block;
+                text-align: center;
+            }
+            paper-card .card-actions{
+                text-align: right;
+            }
+            @media screen and (min-width: 600px) {
+                paper-card{
+                    text-align: left;
+                    width: 400px;
+                }
+            }
+            @media screen and (max-width: 599px) {
+                paper-card{
+                    width: 90%;
+                }
+            }
+            .card-actions > paper-button[raised]{
+                background-color: var(--dark-accent-color);
+                color: #FFF;
+            }
+            
+        </style>
+
+
+        <paper-card elevation="1" animated-shadow="true">
+                <form is="iron-form" id="form">
+                    <div class="card-header">
+                        <iron-icon icon="accessibility"></iron-icon>
+                        Criar conta
+                    </div>
+                    <div class="card-content">
+                        <paper-input id="email" label="Email" type="email" value={{name}}></paper-input>
+                        <paper-input id="senha" label="Senha" type="password" value={{senha}}></paper-input>
+                    </div>
+                    <div class="card-actions">
+                        <paper-button>Cancelar</paper-button>
+                        <paper-button raised id="login">Logar</paper-button>
+                    </div>
+               </form> 
+
+
+       </paper-card>
+
+
+    </template>
+
+<script>
+    Polymer({
+
+        is: 'Form-app',
+        ready: function(){
+            this.$.login.addEventListener("click", ()=>{
+                console.log(this.name);
+                console.log(this.senha);
+            })
+
+        }
+
+  });
+</script>
+</dom-module>

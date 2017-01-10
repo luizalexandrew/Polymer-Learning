@@ -1,0 +1,6 @@
+{
+  "name": "Form",
+  "short_name": "Form",
+  "start_url": "/",
+  "display": "standalone"
+}

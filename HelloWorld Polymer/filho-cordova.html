@@ -1,0 +1,26 @@
+<dom-module id="filho-cordova">
+	
+	<template>
+		<span>{{name}}</span>
+
+	</template>
+	<script type="text/javascript">
+		Polymer({
+			is: "filho-cordova",
+			properties:{
+				name:{
+					type: String, 
+					value: "default",
+					notify: true
+				}
+			},
+			ready: function(){
+				setTimeout(()=>{
+                    this.name = "Luiz Alexandre"
+                },3000)
+            }
+		})
+	</script>
+
+
+</dom-module>

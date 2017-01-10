@@ -1,0 +1,55 @@
+<link rel="import" href="../paper-input/paper-input.hmtl">
+<link rel="import" href="./filho-cordova.html">
+
+<!--
+`hello-cordova`
+Este é um elemento feito no curso de polymer
+
+@demo demo/index.html 
+-->
+
+<dom-module id="hello-cordova">
+    <template>
+        <style type="text/css">
+            :host{
+                display: block;
+            }
+        </style>
+        <h2 id="nomeusuario">Oi <filho-cordova name="{{name}}"></filho-cordova></h2>
+
+
+
+        <a href="http://facebook.com/[[link]]"> Link do perfil</a>
+        <paper-input label="Escreva seu nome" value={{name}} type="search"></paper-input>
+        <paper-input label="Escreva seu perfil" value={{link}} type="search"></paper-input>
+    </template>
+
+    <script type="text/javascript">
+        Polymer({
+            is: 'hello-cordova',
+            properties:{
+                name: {
+                    type: String,
+                    value: "Tio bill"
+                },
+                link: {
+                    type: String,
+                }
+            },
+            created: function(){
+                // setTimeout(()=>{
+                //     this.name = "Luiz Alexandre"
+                // },3000)
+
+            },
+            ready: function(){
+
+
+            },
+            attached: function(){
+
+
+            }
+        });
+    </script>
+</dom-module>

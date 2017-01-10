@@ -1,0 +1,66 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-styles/default-theme.html">
+
+<dom-module id="impressive-form">
+	
+	<template>
+		<style type="text/css">
+			paper-card{
+				width: 100%;
+			}
+			paper-button{
+				background-color: var(--accent-color);
+				color: #FFF;
+				margin-top: 1em;
+				margin-bottom: 1em;
+			}
+		</style>
+		
+		<paper-card heading="Adicionar" animated-shadow="false">
+		  <div class="card-content">
+		  	<form is="iron-form">
+				<paper-input label="Pequena descrição de codigo" id="descricao"></paper-input>
+				<paper-textarea label="Copie seu codigo aqui" id="code" rows="3"></paper-textarea>
+				<paper-input label="Linguagem" id="linguagem"></paper-input>
+
+				
+			</form>
+		  </div>
+		  <div class="card-actions">
+		    <paper-button raised on-tap="addSnippet">Salvar Código</paper-button>
+		  </div>
+		</paper-card>
+
+		
+
+	</template>
+	<script>
+		Polymer({
+			is: "impressive-form",
+		    properties:{
+		        collection:{
+		            type: Array,
+		            notify: true
+		        }
+		    },
+		    addSnippet: function(){
+		    	var codeObj = {
+		    		description: this.$.descricao.value,
+		    		code: this.$.code.value,
+		    		lang: this.$.linguagem.value
+		    	}
+
+		    	this.push("collection", codeObj);
+
+		    }
+		    
+		})
+	</script>
+
+
+</dom-module>
