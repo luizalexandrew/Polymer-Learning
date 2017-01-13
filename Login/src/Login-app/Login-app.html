@@ -1,0 +1,87 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="login-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        text-align: center;
+    }
+    paper-card{
+        top: 20vh;
+        width: 400px;
+    }
+    paper-button{
+        background-color: var(--paper-light-blue-500);
+        color: #FFF;
+    }  
+    paper-input{
+        text-align: left;
+        text-indent: 15px;
+    }
+</style>
+
+<form is="iron-form" id="meulogin">
+    <paper-card heading="Login">
+        <div class="card-content">        
+            <paper-input label="Usuário" value="{{usuario}}"></paper-input>
+            <paper-input label="Senha" value="{{senha}}" type="password"></paper-input>
+        </div>
+        <div class="card-actions">
+            <paper-button id="btnlogin" raised>Entrar</paper-button>
+        </div>
+    </paper-card>
+    {{usuario}}
+    {{senha}}
+    {{data.Data}}
+    {{data.Message}}
+</form>
+
+<iron-ajax
+    auto
+    url="http://186.224.238.2:1913/v1/login"
+    body='{"usuario":"{{usuario}}","senha":"{{senha}}"}'
+    method='POST'
+    content-type="application/x-www-form-urlencoded"
+    last-response="{{data}}"></iron-ajax>
+
+
+
+
+</template>
+
+<script>
+    Polymer({
+
+    is: 'login-app',
+
+    properties: {
+            prop1: {
+                type: String,
+                value: 'login-app',
+        }
+    },
+    ready: function(){
+        this.$.meulogin.addEventListener('iron-form-submit', ()=>{
+            console.log("dasdas");
+        });
+        this.$.btnlogin.addEventListener('click', ()=>{
+            _login();
+        })
+    },
+    _login: function(){
+        console.log("me chamando");
+    }
+
+
+
+});
+</script>
+</dom-module>
+
+
+
