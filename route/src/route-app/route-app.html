@@ -5,6 +5,7 @@
 <link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
 
 
+
 <dom-module id="route-app">
     <template>
         <style>
@@ -13,61 +14,82 @@
             }
         </style>
 
-            <app-location route="{{route}}"></app-location>
-          <app-route
-              route="{{route}}"
-              pattern="/:page"
-              data="{{routeData}}"
-              tail="{{subroute}}"></app-route>
+        <app-location route="{{route}}"></app-location>
+        <app-route
+            route="{{route}}"
+            pattern="/:page"
+            data="{{routeData}}"
+            tail="{{subroute}}"></app-route>
 
-
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
+        <iron-selector selected="[[page]]">
+          <a href="/view1">View One</a>
+          <a href="/view2">View Two</a>
+          <a href="/view3">View Three</a>
         </iron-selector>
 
-
-           <iron-pages
+        <iron-pages
             selected="[[page]]"
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view404 name="view404"></my-view404>
+
+            <my-view1 name="view1"></my-view1>
+            <my-view2 name="view2"></my-view2>
+            <my-view404 name="view404"></my-view404>
           
         </iron-pages>
 
     </template>
 
     <script>
-       Polymer({
-      is: 'route-app',
-      properties: {
-        page: {
-          type: String,
-          reflectToAttribute: true,
-          observer: '_pageChanged',
-        },
-        route: {
-            type: Object
-        }
-      },
-      observers: [
-        '_routePageChanged(routeData.page)',
-      ],
-      _routePageChanged: function(page) {
-        this.page = page || 'view1';       
-      },
-      _pageChanged: function(page) {
-        // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
-        this.importHref(resolvedPageUrl, null, this._showPage404, true);
-      },
-      _showPage404: function() {
-        this.page = 'view404';
-      }
-    });
+        Polymer({
+            is: 'route-app',
+            properties: {
+                page: {
+                  type: String,
+                  reflectToAttribute: true,
+                  observer: '_pageChanged',
+                },
+                route: {
+                    type: Object
+                },
+                routeProvider: {
+                    type: Object,
+                    value: [
+                        {
+                            name: 'view1',
+                            route: '/view1',
+                            templateUrl: './domains/login/login.html'
+                        },
+                        {
+                            name: 'view1',
+                            route: '/view2',
+                            templateUrl: './domains/login/login.html'
+                        },
+                        {
+                            name: 'view1',
+                            route: '/view404',
+                            templateUrl: './domains/login/login.html'
+                        }
+                    ]
+                }
+            },
+            observers: [
+                '_routePageChanged(routeData.page)',
+            ],
+            _routePageChanged: function(page) {
+                this.page = page || 'view1';       
+            },
+            _pageChanged: function(page) {
+
+                var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+                this.importHref(resolvedPageUrl, null, this._showPage404, true);
+
+
+            },
+            _showPage404: function() {
+                this.page = 'view404';
+            }
+        });
     </script>
 </dom-module>
