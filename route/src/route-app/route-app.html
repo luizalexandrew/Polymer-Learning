@@ -4,8 +4,6 @@
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
 
-
-
 <dom-module id="route-app">
     <template>
         <style>
@@ -14,6 +12,13 @@
             }
         </style>
 
+
+        <a href="/view1">View One</a>
+        <a href="/view2">View Two</a>
+        <a href="/view3">View Three</a>
+        <a href="/view1/vamos">View One Vamos</a>
+
+
         <app-location route="{{route}}"></app-location>
         <app-route
             route="{{route}}"
@@ -21,14 +26,8 @@
             data="{{routeData}}"
             tail="{{subroute}}"></app-route>
 
-        <iron-selector selected="[[page]]">
-          <a href="/view1">View One</a>
-          <a href="/view2">View Two</a>
-          <a href="/view3">View Three</a>
-        </iron-selector>
-
         <iron-pages
-            selected="[[page]]"
+            selected="{{page}}"
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
@@ -39,6 +38,9 @@
           
         </iron-pages>
 
+
+
+
     </template>
 
     <script>
@@ -46,9 +48,9 @@
             is: 'route-app',
             properties: {
                 page: {
-                  type: String,
-                  reflectToAttribute: true,
-                  observer: '_pageChanged',
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
                 },
                 route: {
                     type: Object
@@ -57,38 +59,40 @@
                     type: Object,
                     value: [
                         {
-                            name: 'view1',
-                            route: '/view1',
-                            templateUrl: './domains/login/login.html'
+                            page: "view1",
+                            component: "my-view1",
+                            templateUrl: "./my-view1.html"
                         },
                         {
-                            name: 'view1',
-                            route: '/view2',
-                            templateUrl: './domains/login/login.html'
+                            page: "view2",
+                            component: "my-view2",
+                            templateUrl: "./my-view2.html"
                         },
                         {
-                            name: 'view1',
-                            route: '/view404',
-                            templateUrl: './domains/login/login.html'
+                            page: "view404",
+                            component: "my-view404",
+                            templateUrl: "./my-view404.html"
                         }
                     ]
                 }
             },
             observers: [
-                '_routePageChanged(routeData.page)',
+                '_routePageChanged(routeData.page)'
             ],
             _routePageChanged: function(page) {
-                this.page = page || 'view1';       
+                this.page = page || 'view1';
             },
-            _pageChanged: function(page) {
+            _pageChanged: function() {
 
-                var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
-                this.importHref(resolvedPageUrl, null, this._showPage404, true);
+                for (i = 0; i < this.routeProvider.length ; i++) {
+                    if (this.routeProvider[i].page === this.page) {
+                        var resolvedPageUrl = this.resolveUrl(this.routeProvider[i].templateUrl);
+                        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+                        return 0;                        
+                    }
+                }
 
 
-            },
-            _showPage404: function() {
-                this.page = 'view404';
             }
         });
     </script>
