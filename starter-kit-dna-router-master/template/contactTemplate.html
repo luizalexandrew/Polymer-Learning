@@ -1,0 +1,29 @@
+<dom-module id="contact-template">
+	<style>
+	    :host {
+	      position: relative;
+	      width: 100px;
+	    }
+	</style>
+	<template>
+		<div class="input">
+		<h2>contact</h2>
+		<a href="#/home">Ir para Home</a>
+
+		</div>
+	</template>
+</dom-module>
+
+<script>
+
+Polymer({
+	is: 'contact-template',
+	properties: {
+		params: {
+			type: 'Object'
+		},
+	},
+	behaviors: [],
+	
+});
+</script>

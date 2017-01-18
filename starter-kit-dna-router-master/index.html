@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+     
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    </head>
+ 
+    <body>
+
+        <dna-config id='conf' home='contact' template='/template'></dna-config>
+
+        <dna-new-state state='home' route='/home'></dna-new-state>
+        <dna-new-state state='home2' route='/home/birr'></dna-new-state>
+        <dna-new-state state='contact' route='/contact'></dna-new-state>
+
+
+        <dna-many-view>
+
+                <dna-view 
+                    state='home'
+                    on-auth
+                    element='home-template'
+                    else-state='login'></dna-view>
+
+                <dna-view 
+                    state='home2'
+                    on-auth
+                    element='home-template'
+                    else-state='login'></dna-view>
+
+        </dna-many-view>
+
+        <dna-view state='contact' element='contact-template'></dna-view>
+
+      
+
+    </body>
+
+
+    <link rel="import" href="bower_components/dna-router/dna.html">
+    <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+<!--     <link rel="import" href="comp/esp.hello.html">
+ -->
+    <script src="./bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+
+</html>

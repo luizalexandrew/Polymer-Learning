@@ -1,0 +1,40 @@
+<link rel="import" href="../comp/esp-hello.html">
+
+<dom-module id="home-template">
+	<style>
+	    :host {
+	      position: relative;
+	      width: 100px;
+	    }
+	</style>
+	<template>
+		<div class="input">
+		<h2>Hi your page is authenticated, and you have reached home.</h2>
+<!-- 		<a is='s-ref' goto='["contact"]'>Contact</a>  
+ -->
+		<a href="#/contact">Ir para contact</a>
+		
+		<esp-hello></esp-hello>
+		<h2>Hi your page is authenticated, and you have reached home.</h2>
+		</div>
+	</template>
+</dom-module>
+
+<script>
+
+Polymer({
+	is: 'home-template',
+	properties: {
+		params: {
+			type: 'Object'
+		}
+	},
+	logout: function(){
+		var conf = document.querySelector('#conf');
+		conf.auth = false;
+	},
+	attached: function(){
+		console.log('Hi your page is authenticated, and you have reached home.')
+	},
+});
+</script>

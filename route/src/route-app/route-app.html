@@ -86,6 +86,7 @@
 
                 for (i = 0; i < this.routeProvider.length ; i++) {
                     if (this.routeProvider[i].page === this.page) {
+                        console.log(this.subroute);
                         var resolvedPageUrl = this.resolveUrl(this.routeProvider[i].templateUrl);
                         this.importHref(resolvedPageUrl, null, this._showPage404, true);
                         return 0;                        
