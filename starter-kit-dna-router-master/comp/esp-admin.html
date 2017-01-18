@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="esp-admin">
+
+	<template>
+		<style>
+			h1{
+				background-color: #FF0000;
+			}
+		</style>
+		<h1>Hello world Admin {{params}}</h1>
+		<a href="#/contact">Ir para contato</a>
+	</template>
+	<script>
+		Polymer({
+			is: "esp-admin",
+			ready: function(){
+				let id = parseInt(window.location.hash.split('/').pop());
+
+				if (Number.isInteger(id)) {
+					console.log(id);
+				}else{
+					window.location.hash = "#/notfound"
+				}
+			}
+		})
+	</script>
+	
+</dom-module>

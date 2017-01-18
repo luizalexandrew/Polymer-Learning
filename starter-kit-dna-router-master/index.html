@@ -8,11 +8,12 @@
  
     <body>
 
-        <dna-config id='conf' home='contact' template='/template'></dna-config>
 
+        <dna-new-state state='home' route='/'></dna-new-state>
         <dna-new-state state='home' route='/home'></dna-new-state>
-        <dna-new-state state='home2' route='/home/birr'></dna-new-state>
         <dna-new-state state='contact' route='/contact'></dna-new-state>
+        <dna-new-state state='admin' route='/contact/admin/:id/'></dna-new-state>
+        <dna-new-state state='notfound' route='/notfound'></dna-new-state>
 
 
         <dna-many-view>
@@ -20,20 +21,29 @@
                 <dna-view 
                     state='home'
                     on-auth
-                    element='home-template'
+                    element='esp-hello'
+                    template='comp'
                     else-state='login'></dna-view>
-
-                <dna-view 
-                    state='home2'
-                    on-auth
-                    element='home-template'
-                    else-state='login'></dna-view>
-
         </dna-many-view>
 
-        <dna-view state='contact' element='contact-template'></dna-view>
+        <dna-view 
+            state='contact'
+            element='esp-birrr'
+            template='comp'
+            else-state='login'></dna-view>
 
-      
+        <dna-view 
+            state='admin'
+            element='esp-admin'
+            template='comp'
+            else-state='login'></dna-view>
+
+        <dna-view 
+            state='notfound'
+            element='esp-not'
+            template='comp'
+            else-state='login'></dna-view>
+
 
     </body>
 
